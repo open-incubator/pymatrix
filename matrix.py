@@ -2,6 +2,8 @@ from random import randint
 from place import Place
 from someone import Someone
 from time import sleep
+from faker import Factory
+from threading import Thread
 import sys
 
 class Matrix:
@@ -31,11 +33,10 @@ class Matrix:
     def generateCoords(self):
         x = 0
         y = 0
-        while x in self.usedCases or y in self.usedCases:
+        while  str(x)+':'+str(y) in self.usedCases:
             x = randint(self.startX, self.endX)
             y = randint(self.startY, self.endY)
-        self.usedCases.append(x)
-        self.usedCases.append(y)
+        self.usedCases.append(str(x)+':'+str(y))
         return [x, y]
 
     """ 
@@ -136,6 +137,17 @@ class Matrix:
             else:
                 peopleCoords[coords] = [someone.identifiant]
 
+    def older(self):
+        while True:
+            sleep(1)
+            for somebody in self.people:
+                if somebody.age > 60:
+                    willBeDead = Factory.create().boolean(chance_of_getting_true=somebody.age)
+                    print(willBeDead)
+                else:    
+                    somebody.age += 1
+
+
 def main():
     print('Hello ...')
     sleep(0.5)
@@ -147,10 +159,7 @@ def main():
         round += 1
         world.randomEvent()
         world.meetPeople()
-        #world.older()
-        #world.kill()
-        sleeptime = randint(200, 800)
-        sleep(sleeptime/1000)
+        #Thread(target = world.older).start()
 
 if __name__ == '__main__':
     main()
