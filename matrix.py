@@ -137,13 +137,31 @@ class Matrix:
             else:
                 peopleCoords[coords] = [someone.identifiant]
 
+    # The loop that makes the world live
+    def loop(self):
+        while True:
+
+            self.randomEvent()
+            self.meetPeople()
+
+    # The loop that make people die      
     def older(self):
         while True:
-            sleep(1)
+            sleep(0.1)
             for somebody in self.people:
                 if somebody.age > 60:
-                    willBeDead = Factory.create().boolean(chance_of_getting_true=somebody.age)
-                    print(willBeDead)
+                    if Factory.create().boolean(chance_of_getting_true=somebody.age):
+                        print(somebody.identifiant, ' is dead')
+                        houseCoords = str(somebody.house.x)+':'+str(somebody.house.y)
+                        self.usedCases.remove(houseCoords) if houseCoords in self.usedCases else None
+                        for someone in self.people:
+                            if somebody.identifiant in someone.nothingSpecials:
+                                someone.nothingSpecials.remove(somebody.identifiant)
+                            if somebody.identifiant in someone.friends:
+                                someone.friends.remove(somebody.identifiant)
+                            if somebody.partner == someone.identifiant:
+                                someone.partner = False
+                        somebody = None
                 else:    
                     somebody.age += 1
 
@@ -154,12 +172,8 @@ def main():
     print('Welcome in the Mytrix')
     # World coords have to be positive
     world = Matrix(5, 0, 200, 0, 200, 20, 20)
-    round = 0
-    while 1==1:
-        round += 1
-        world.randomEvent()
-        world.meetPeople()
-        #Thread(target = world.older).start()
+    Thread(target = world.loop).start()
+    Thread(target = world.older).start()    
 
 if __name__ == '__main__':
     main()
