@@ -151,7 +151,7 @@ class Matrix:
             for somebody in self.people:
                 if somebody.age > 60:
                     if Factory.create().boolean(chance_of_getting_true=somebody.age):
-                        print(somebody.identifiant, ' is dead')
+                        print(somebody.x,':',somebody.y,':',somebody.identifiant, ':D')
                         houseCoords = str(somebody.house.x)+':'+str(somebody.house.y)
                         self.usedCases.remove(houseCoords) if houseCoords in self.usedCases else None
                         for someone in self.people:
@@ -169,7 +169,7 @@ class Matrix:
 def main():
     print('Hello ...')
     sleep(0.5)
-    print('Welcome in the Mytrix')
+    print('Welcome in the Matrix')
     # World coords have to be positive
     world = Matrix(5, 0, 200, 0, 200, 20, 20)
     Thread(target = world.loop).start()
