@@ -7,8 +7,7 @@ from threading import Thread
 import sys
 
 class Matrix:
-    def __init__(self, eventPerLine, startX, endX, startY, endY, placesNumber, startPeople):
-        self.eventPerLine = eventPerLine
+    def __init__(self, startX, endX, startY, endY, placesNumber, startPeople):
         self.startX = startX
         self.endX = endX
         self.startY = startY
@@ -171,7 +170,7 @@ def main():
     sleep(0.5)
     print('Welcome in the Matrix')
     # World coords have to be positive
-    world = Matrix(5, 0, 200, 0, 200, 20, 20)
+    world = Matrix(5, 200, 0, 200, 20, 20)
     Thread(target = world.loop).start()
     Thread(target = world.older).start()    
 
