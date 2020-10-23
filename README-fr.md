@@ -7,6 +7,8 @@
 
 🔌 Le monde dans un ordinateur, représentation virtuelle de la réalité
 
+![Demo](https://s8.gifyu.com/images/demo89ed580835b4b321.gif)
+
 ## Pourquoi
 J'étudiais un texte de Bergson à propos de la conscience lors de mon cours de philosophie quand la personne en face de moi s'indigna après avoir entendu que le monde dans lequel nous vivons pouvait être une simulation informatique. C'était tellement inconcevable pour lui que même les arguments de la professeur qui était pourtant fondés ne l'eut pas convaincu. C'est pourquoi j'ai décidé de prouver que tout peut être une simulation. J'ai créé ce petit programme en quelques jours avec les règles basiques de notre monde afin de le "virtualiser". J'ai aussi décidé de le rendre Open-Source pour ce [mois de l'Hacktoberfest](https://hacktoberfest.digitalocean.com/) pour partager ô combien il est facile de créer une simulation basique de nos vies. Si un simple adolescent de 17 ans a réussi à programmer ceci en quelques jours, on peut se demander si il est probable qu'en 2000 ans, un groupe de personnes expérimentées ait réussi à faire de notre monde une simulation.
 

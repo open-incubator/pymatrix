@@ -7,6 +7,8 @@
 
 🔌 The world in a computer, virtual representation of the reality
 
+![Demo](https://s8.gifyu.com/images/demo89ed580835b4b321.gif)
+
 ## Why
 I was studying a text from Bergson about consciousness in my philosophy lesson when the guy in front of me could not believe that we could be inside a computer simulation. It was so unbelievable for him that even the arguments of the teacher could not convince him. That's why I decided to prove that everything can be a simulation. I created this small program with basic rules to "virtualize" our world.
 I also decided to make it open-source for this [Hacktoberfest month](https://hacktoberfest.digitalocean.com/) to share how simple it would be to create a basic simulation of our lives. If a 17 years old programmer achieved this in a few days, we can ask ourselves if someone could achieve the entire simulation of our world with all its complexity and all its rules in 2000 years.
