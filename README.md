@@ -9,7 +9,7 @@
 
 ## Why
 I was studying a text from Bergson about consciousness in my philosophy lesson when the guy in front of me could not believe that we could be inside a computer simulation. It was so unbelievable for him that even the arguments of the teacher could not convince him. That's why I decided to prove that everything can be a simulation. I created this small program with basic rules to "virtualize" our world.
-I also decided to make it open-source for this [Hacktoberfest month](https://hacktoberfest.digitalocean.com/) to share how simple it would be to create a basic simulation of our lives.
+I also decided to make it open-source for this [Hacktoberfest month](https://hacktoberfest.digitalocean.com/) to share how simple it would be to create a basic simulation of our lives. If a 17 years old programmer achieved this in a few days, we can ask ourselves if someone could achieve the entire simulation of our world with all its complexity and all its rules in 2000 years.
 
 ## How it works
 At the beginning of the program, the size of the world is defined. The size also defines the limit of people the world can handle. If the limit is reached, the world crash. The first number of people is also defined (these people will spawn at the beginning of the program before everything starts). As in the real world, everybody receives an ID at birth, this ID allows us to track what people do.
@@ -23,10 +23,10 @@ This world has four events that can be triggered by someone:
 * Go back home (`H`)
 * Give birth to someone (`B`)
 
-The program randomly decides on who should be triggered the event and when it should be.
+The program randomly decides on who should be triggered the event and when it should be. Humans think they make their own choices but in fact the program instills in them the choices they had to make.
 
 ### Relationships
-Every time somebody is at the same place as someone else, they create a relationship between them. There are three types of relationships:
+Every time somebody is at the same place as someone else, they create a link between them: a relationship. There are three types of relationships:
 1. Acquaintance 
 2. Friend
 3. Partner
