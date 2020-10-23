@@ -70,5 +70,5 @@ That's right but at the speed of the matrix, you won't be able to read anything 
 ## In the future
 Since this project is open-source, here is what we could create with the matrix:
 
-* Transform it into a webhook server so we could create an interpreter to act on the matrix. Change it live, for example: give birth to someone or make somebody else die.
+* Transform it into a websocket server so we could create an interpreter to act on the matrix. Change it live, for example: give birth to someone or make somebody else die.
 * Create a graphical representation of the matrix, just a few points on a "squared sheet" with their id on top of them would be a good beginning.
