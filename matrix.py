@@ -4,6 +4,7 @@ from someone import Someone
 from time import sleep
 from faker import Factory
 from threading import Thread
+import socketio
 import sys
 
 class Matrix:
@@ -79,26 +80,26 @@ class Matrix:
             if event == 'W':
                 if someone.x == someone.workplace.x and someone.y == someone.workplace.y:
                     coords = someone.goToHome()
-                    print(coords[0],':',coords[1],':',someone.identifiant,':H/')
+                    sio.emit('goToHome', (coords, someone.identifiant))
                 else:
                     coords = someone.goToWork()
-                    print(coords[0],':',coords[1],':',someone.identifiant,':W/')
+                    sio.emit('goToWork', (coords, someone.identifiant))
             elif event == 'S':
                 if someone.x == someone.mall.x and someone.y == someone.mall.y:
                     coords = someone.goToHome()
-                    print(coords[0],':',coords[1],':',someone.identifiant,':H/')
+                    sio.emit('goToHome', (coords, someone.identifiant))
                 else:
                     coords = someone.goToShop()
-                    print(coords[0],':',coords[1],':',someone.identifiant,':S/')
+                    sio.emit('goToShop', (coords, someone.identifiant))
 
         if event == 'B':
             if len(self.people)+1 < (self.limit - len(self.people)):
                 coords = self.generateCoords()
                 someone = Someone(len(self.people)+1, coords[0], coords[1], self.getMall(), self.getWorkplace())
                 self.people.append(someone)
-                print(coords[0],':',coords[1],':',someone.identifiant,':',event,'/')
+                sio.emit('Can join there', (coords, someone.identifiant, event))
             else:
-                print('Too much people there')
+                sio.emit('Too much people there')
 
     # Make people meet each other
     def meetPeople(self):
@@ -114,22 +115,22 @@ class Matrix:
                                 if chance <= 6:
                                     someone.nothingSpecials.append(identifiant)
                                     somebody.nothingSpecials.append(someone.identifiant)
-                                    print(someone.x,':',someone.y,':',someone.identifiant,':M',somebody.identifiant,'/')
+                                    sio.emit('nothing special', (someone.x, someone.y, someone.identifiant, somebody.identifiant))
                                     #print(someone.identifiant,' become nothing with ', identifiant)
                                 elif chance > 6 and chance < 9:
                                     someone.friends.append(identifiant)
                                     somebody.friends.append(someone.identifiant)
-                                    print(someone.x,':',someone.y,':',someone.identifiant,':M',somebody.identifiant,'/')
+                                    sio.emit('friends', (someone.x, someone.y, someone.identifiant, somebody.identifiant))
                                     #print(someone.identifiant, " become friend with ",identifiant)
                                 elif chance == 10:
                                     if someone.partner == False:
                                         someone.partner = identifiant
                                         somebody.partner = someone.identifiant
-                                        print(someone.x,':',someone.y,':',someone.identifiant,':P',somebody.identifiant,'/')
+                                        sio.emit('partner', (someone.x, someone.y, someone.identifiant, somebody.identifiant))
                                     else:
                                         someone.friends.append(identifiant)
                                         somebody.friends.append(someone.identifiant)
-                                        print(someone.x,':',someone.y,':',someone.identifiant,':M',somebody.identifiant,'/')
+                                        sio.emit('someone', (someone.x, someone.y, someone.identifiant, somebody.identifiant))
                                         #print(someone.identifiant, " become friend with ",identifiant)
 
                 peopleCoords[coords].append(someone.identifiant)
@@ -150,7 +151,7 @@ class Matrix:
             for somebody in self.people:
                 if somebody.age > 60:
                     if Factory.create().boolean(chance_of_getting_true=somebody.age):
-                        print(somebody.x,':',somebody.y,':',somebody.identifiant, ':D')
+                        sio.emit('Aging', (somebody.x, somebody.y, somebody.identifiant))
                         houseCoords = str(somebody.house.x)+':'+str(somebody.house.y)
                         self.usedCases.remove(houseCoords) if houseCoords in self.usedCases else None
                         for someone in self.people:
@@ -166,13 +167,14 @@ class Matrix:
 
 
 def main():
-    print('Hello ...')
-    sleep(0.5)
-    print('Welcome in the Matrix')
+    sio.emit('Hello')
+    sio.sleep(0.5)
+    sio.emit('Welcome in the Matrix')
     # World coords have to be positive
     world = Matrix(5, 200, 0, 200, 20, 20)
     Thread(target = world.loop).start()
     Thread(target = world.older).start()    
 
 if __name__ == '__main__':
+    sio = socketio.Server()
     main()
